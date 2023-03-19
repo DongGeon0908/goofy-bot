@@ -43,10 +43,6 @@ allOpen {
 
 object DependencyVersion {
     const val KOTLIN_LOGGING_VERSION = "3.0.0"
-    const val SWAGGER_VERSION = "2.10.5"
-    const val JWT_VERSION = "4.1.0"
-    const val SHEDLOCK_VERSION = "4.24.0"
-    const val AWS_S3_SDK_VERSION = "1.12.351"
     const val LOGBACK_ENCODER = "7.2"
 }
 
