@@ -18,6 +18,8 @@ class TargetMetadata(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = -1L,
 
+    val title: String,
+
     @Enumerated(EnumType.STRING)
     val type: TargetType,
 

@@ -44,6 +44,7 @@ allOpen {
 object DependencyVersion {
     const val KOTLIN_LOGGING_VERSION = "3.0.0"
     const val LOGBACK_ENCODER = "7.2"
+    const val SWAGGER_VERSION = "2.10.5"
 }
 
 dependencies {
@@ -63,6 +64,11 @@ dependencies {
     /** logger */
     implementation("io.github.microutils:kotlin-logging-jvm:${DependencyVersion.KOTLIN_LOGGING_VERSION}")
     implementation("net.logstash.logback:logstash-logback-encoder:${DependencyVersion.LOGBACK_ENCODER}")
+
+    /** swagger */
+    implementation("io.springfox:springfox-swagger2:${DependencyVersion.SWAGGER_VERSION}")
+    implementation("io.springfox:springfox-swagger-ui:${DependencyVersion.SWAGGER_VERSION}")
+    implementation("io.springfox:springfox-spring-webmvc:${DependencyVersion.SWAGGER_VERSION}")
 
     /** mysql */
     runtimeOnly("mysql:mysql-connector-java")
