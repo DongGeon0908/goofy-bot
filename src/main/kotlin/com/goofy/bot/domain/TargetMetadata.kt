@@ -1,6 +1,5 @@
 package com.goofy.bot.domain
 
-import com.goofy.bot.domain.enum.TargetType
 import org.springframework.http.HttpMethod
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -20,13 +19,16 @@ class TargetMetadata(
 
     val title: String,
 
-    @Enumerated(EnumType.STRING)
-    val type: TargetType,
+    val target: String,
+
+    val url: String,
 
     @Column(name = "http_method")
-    val httpMethod: HttpMethod? = null,
+    @Enumerated(value = EnumType.STRING)
+    val httpMethod: HttpMethod,
 
-    val target: String,
+    @Column(columnDefinition = "TEXT")
+    val request: String,
 
     val note: String? = null
 ) : BaseEntity()
