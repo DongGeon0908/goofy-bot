@@ -1,7 +1,6 @@
 package com.goofy.bot.application
 
 import com.goofy.bot.common.extension.toJson
-import com.goofy.bot.common.webclient.WebClientFactory
 import com.goofy.bot.domain.TargetMetadata
 import com.goofy.bot.dto.TargetRequest
 import com.goofy.bot.dto.TargetResponse
@@ -13,7 +12,8 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class TargetService(
-    private val targetMetadataRepository: TargetMetadataRepository
+    private val targetMetadataRepository: TargetMetadataRepository,
+    private val targetCallService: TargetCallService
 ) {
     private val logger = KotlinLogging.logger {}
 
@@ -44,20 +44,15 @@ class TargetService(
     }
 
     @Transactional
-    fun call(id: Long) {
+    fun call(id: Long): Map<*, *>? {
         val target = targetMetadataRepository.findByIdOrNull(id)
             ?: throw RuntimeException()
 
         val requestParam = target.getRequestParamMap()
 
-        val webClient = WebClientFactory.generate(baseUrl = target.baseUrl)
-
-        val response = webClient.get()
-            .uri(target.baseUrl, requestParam)
-            .retrieve()
-            .bodyToMono(String::class.java)
-            .block()
-
-        println(response)
+        return targetCallService.call(
+            baseUrl = target.baseUrl,
+            requestParam = requestParam
+        ).block()
     }
 }

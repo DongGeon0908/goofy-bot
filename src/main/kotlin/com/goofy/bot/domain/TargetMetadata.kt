@@ -23,7 +23,7 @@ class TargetMetadata(
 
     val baseUrl: String,
 
-    @Column(name = "request_param")
+    @Column(name = "request_param", columnDefinition = "TEXT")
     val requestParam: String?,
 
     @Column(name = "http_method")
