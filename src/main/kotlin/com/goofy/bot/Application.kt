@@ -10,7 +10,7 @@ import org.springframework.core.env.Environment
 import java.util.*
 
 @SpringBootApplication
-class GoofyBotApplication(
+class Application(
     private val environment: Environment
 ) : ApplicationListener<ApplicationReadyEvent> {
     private val logger = KotlinLogging.logger { }
@@ -22,7 +22,7 @@ class GoofyBotApplication(
 
 fun main(args: Array<String>) {
     init()
-    runApplication<GoofyBotApplication>(*args)
+    runApplication<Application>(*args)
 }
 
 fun init() {

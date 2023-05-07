@@ -1,5 +1,7 @@
 package com.goofy.bot.domain
 
+import com.fasterxml.jackson.module.kotlin.readValue
+import com.goofy.bot.common.extension.mapper
 import org.springframework.http.HttpMethod
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -19,16 +21,28 @@ class TargetMetadata(
 
     val title: String,
 
-    val target: String,
+    val baseUrl: String,
 
-    val url: String,
+    @Column(name = "request_param")
+    val requestParam: String?,
 
     @Column(name = "http_method")
     @Enumerated(value = EnumType.STRING)
-    val httpMethod: HttpMethod,
+    val httpMethod: HttpMethod = HttpMethod.GET,
 
     @Column(columnDefinition = "TEXT")
-    val request: String,
-
     val note: String? = null
-) : BaseEntity()
+) : BaseEntity() {
+    data class RequestParam(
+        val key: String,
+        val value: String
+    )
+
+    fun getRequestParamMap(): Map<String, Any>? {
+        if (requestParam == null) {
+            return null
+        }
+
+        return mapper.readValue(requestParam!!)
+    }
+}
